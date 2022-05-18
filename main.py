@@ -87,15 +87,15 @@ def load_apiex():
     #     print('Quantidade de digitos inválidos!')
     #     exit()
     # else:
-      #  request = requests.get(
-       #     'https://viacep.com.br/ws/{}/json/'.format(cep_input))
-        # print(request.json())
-        # exit()
+    #  request = requests.get(
+    #     'https://viacep.com.br/ws/{}/json/'.format(cep_input))
+    # print(request.json())
+    # exit()
 
     request = requests.get(
-            'https://www.sciencedirect.com/search?tak=apple&apiKey=fab175511ea4725a068b2d461a632a5e')
+        'https://www.sciencedirect.com/search?tak=apple&apiKey=fab175511ea4725a068b2d461a632a5e')
     print(request.json())
-    exit() 
+    exit()
 
 
 configuration = read_yaml('config')
