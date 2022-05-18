@@ -94,7 +94,7 @@ def load_apiex():
 
     request = requests.get(
         'https://www.sciencedirect.com/search?tak=apple&apiKey=fab175511ea4725a068b2d461a632a5e')
-    print(request.json())
+    print(request.pdf())
     exit()
 
 
