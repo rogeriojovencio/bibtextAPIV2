@@ -14,5 +14,3 @@ filter: title == 'CONIC OPTIMIZATION'
 # scimago_value > 20.0
 
 query: sort_order=asc&sort_field=article_number&publication_title=python
-
-

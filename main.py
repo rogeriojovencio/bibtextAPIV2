@@ -83,7 +83,7 @@ def ieee_api(query):
     max_records = 50
     total_records = 0
     df = pd.DataFrame()
-    
+
     while True:
         print("retrieving data from IEEE API [max_records: " + str(
             max_records) + " , start_record: " + str(start_record) + "]")
@@ -118,6 +118,7 @@ def ieee_api(query):
     df = df.reindex(columns=columns)
     return df
 
+
 lite.sqlAPI()
 configuration = read_yaml('config')
 
@@ -125,7 +126,7 @@ configuration = read_yaml('config')
 if (configuration['type'] not in ['json', 'yaml', 'csv', 'xml', 'Sqlite']):
     print('Invalid value')
     exit()
- 
+
 df_bib = pd.DataFrame()
 try:
     query = configuration['query']
@@ -172,6 +173,3 @@ elif (configuration['type'] == 'xml'):
 elif (configuration['type'] == 'mysql'):
     # GRAVAR PARA O BANCO AQUIelse:
     print('Option is not available')
-
-
-
