@@ -107,7 +107,7 @@ def ieee_api(query):
 
             df_nested_list = pd.json_normalize(
                 result, record_path=['articles'])
-            df = pd.concat([df, df_nested_list], ignore_index=True)
+            df = pd.concat([df, df_nested_list], ignore_index=True)            
         else:
             break
 
@@ -116,14 +116,15 @@ def ieee_api(query):
     columns = ["author", "title", "keywords",
                "abstract", "year", "type_publication", "doi"]
     df = df.reindex(columns=columns)
+    
     return df
+   
 
 
-lite.sqlAPI()
 configuration = read_yaml('config')
 
 
-if (configuration['type'] not in ['json', 'yaml', 'csv', 'xml', 'Sqlite']):
+if (configuration['type'] not in ['json', 'yaml', 'csv', 'xml', 'sqlite']):
     print('Invalid value')
     exit()
 
@@ -132,6 +133,7 @@ try:
     query = configuration['query']
     print("Query active: " + query)
     df_bib = ieee_api(query)
+    lite.sqlAPI(df_bib)                   
 except Exception:
     df_bib = load_bibs()
 

@@ -1,4 +1,4 @@
-type: mysql
+type: json
 file_name: output
 filter: title == 'CONIC OPTIMIZATION'
 
