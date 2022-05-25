@@ -4,7 +4,7 @@ import json
 import yaml
 import requests
 import sqlite as lite
-import api as p
+#import api as p
 
 
 # Read a yaml file.
@@ -85,7 +85,7 @@ def ieee_api(query):
     max_records = 50
     total_records = 0
     df = pd.DataFrame()
-
+    lite.sqlAPI(df)
     while True:
         print("retrieving data from IEEE API [max_records: " + str(
             max_records) + " , start_record: " + str(start_record) + "]")
@@ -95,8 +95,8 @@ def ieee_api(query):
 
         # Make a request for a given paper
         resp = requests.get(url)
-        lite.sqlAPI(resp)
-        p.api_all
+
+        # p.api_all
 
         if (resp.ok):
             result = resp.json()

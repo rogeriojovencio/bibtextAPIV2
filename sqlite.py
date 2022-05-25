@@ -12,7 +12,7 @@ def sqlAPI(resp):
 
     for row in resp:
         cur.execute("INSERT INTO APIIEEE VALUES (?,?,?,?,?)",
-                    ('doi', 'df_bib.title', 'df_bib.publisher', 'df_bib.isbn', 'df_bib.rank'))
+                    (str(row.doi), str(row.title), str(row.publisher), str(row.isbn), str(row.rank)))
 
         con.commit()
         con.close()

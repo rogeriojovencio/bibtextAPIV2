@@ -1,7 +1,7 @@
 import flask
 from flask import request, jsonify
 import sqlite3
-import pandas as pd
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -9,19 +9,21 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    
+
     return '''<h1>API</h1>
 <p>Esta API retorna dados do Sqlite.</p>'''
-app.run()
 
 
-@app.route('/all', methods=['GET'])
+@app.route('/dicionario', methods=['GET'])
 def api_all():
-    conn = sqlite3.connect('exemple.db')
-    cur = conn.cursor()
-    all_books = cur.execute('SELECT * FROM APIEEE;').fetchall()
+     conn = sqlite3.connect('example.db')
+     cur = conn.cursor()
 
-    return jsonify(all_books)
+     all_books = cur.execute('SELECT * FROM APIIEEE').fetchall()
+
+     # for row in cur.execute('SELECT * FROM APIEEE'):
+     #     print(row)
+     return jsonify(all_books)
 
 
-
+app.run()
