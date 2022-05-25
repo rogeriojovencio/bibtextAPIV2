@@ -4,6 +4,7 @@ import json
 import yaml
 import requests
 import sqlite as lite
+import api as p
 
 
 # Read a yaml file.
@@ -24,6 +25,7 @@ def read_bib(name):
     print('Loading file/'+name+'.bib file')
     with open('file/'+name+'.bib', encoding='utf-8') as bibtex_file:
         bib_database = bibtexparser.load(bibtex_file)
+
     return pd.DataFrame.from_records(bib_database.entries)
 
 # Convert a row to xml
@@ -93,6 +95,8 @@ def ieee_api(query):
 
         # Make a request for a given paper
         resp = requests.get(url)
+        lite.sqlAPI(resp)
+        p.api_all
 
         if (resp.ok):
             result = resp.json()
@@ -107,7 +111,7 @@ def ieee_api(query):
 
             df_nested_list = pd.json_normalize(
                 result, record_path=['articles'])
-            df = pd.concat([df, df_nested_list], ignore_index=True)            
+            df = pd.concat([df, df_nested_list], ignore_index=True)
         else:
             break
 
@@ -116,9 +120,8 @@ def ieee_api(query):
     columns = ["author", "title", "keywords",
                "abstract", "year", "type_publication", "doi"]
     df = df.reindex(columns=columns)
-    
+
     return df
-   
 
 
 configuration = read_yaml('config')
@@ -133,7 +136,8 @@ try:
     query = configuration['query']
     print("Query active: " + query)
     df_bib = ieee_api(query)
-    lite.sqlAPI(df_bib)                   
+
+
 except Exception:
     df_bib = load_bibs()
 
