@@ -1,4 +1,4 @@
-type: json
+type: csv
 file_name: output
 filter: title == 'CONIC OPTIMIZATION'
 

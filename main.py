@@ -4,7 +4,7 @@ import json
 import yaml
 import requests
 import sqlite as lite
-#import api as p
+import api as p
 
 
 # Read a yaml file.
@@ -85,7 +85,7 @@ def ieee_api(query):
     max_records = 50
     total_records = 0
     df = pd.DataFrame()
-    lite.sqlAPI(df)
+
     while True:
         print("retrieving data from IEEE API [max_records: " + str(
             max_records) + " , start_record: " + str(start_record) + "]")
@@ -127,7 +127,7 @@ def ieee_api(query):
 configuration = read_yaml('config')
 
 
-if (configuration['type'] not in ['json', 'yaml', 'csv', 'xml', 'sqlite']):
+if (configuration['type'] not in ['json', 'yaml', 'csv', 'xml', 'sqlite', 'api']):
     print('Invalid value')
     exit()
 
@@ -164,7 +164,9 @@ if (configuration['type'] == 'json'):
 
 elif (configuration['type'] == 'csv'):
     df.to_csv(configuration['file_name'] + ".csv")
-
+    lite.sqlAPI(df)
+# elif(configuration['Type'] == 'api'):
+#     p.home()
 elif (configuration['type'] == 'yaml'):
     # Convert dataframe into json object (easier to convert to yaml)
     data = json.loads(df.to_json(orient='records'))
@@ -176,6 +178,6 @@ elif (configuration['type'] == 'xml'):
     file.write('\n'.join(df.apply(to_xml, axis=1)),)
     file.close()
 
-elif (configuration['type'] == 'mysql'):
+elif (configuration['type'] == 'Sqlite'):
     # GRAVAR PARA O BANCO AQUIelse:
     print('Option is not available')
